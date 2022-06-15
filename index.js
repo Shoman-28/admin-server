@@ -1,20 +1,17 @@
 const express=require('express');
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const cors = require('cors');
 const ObjectId =require('mongodb').ObjectId;
 
+const cors = require('cors');
+require('dotenv').config()
+
 const app=express();
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-const port =5000;
-
-//shoman234
-//user: shoman
-
-
-const uri = "mongodb+srv://shoman:shoman234@cluster0.o8wmq35.mongodb.net/?retryWrites=true&w=majority";
+ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.o8wmq35.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 // client.connect(err => {
 //   const collection = client.db("addProduct").collection("product");
@@ -117,5 +114,5 @@ app.get('/', (req, res)=>{
 //     // console.log(req.params.id)
 // })
 app.listen(port,()=>{
-    console.log('listen to ',port);
+    console.log('listen tto ',port);
 })
